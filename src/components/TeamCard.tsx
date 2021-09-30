@@ -1,12 +1,21 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { Team } from "../types/teamTypes";
 
 export default function TeamCard(props: Team) {
-  const { name, country, founded, titles, championsLeagueParticipant } = props;
+  const { id, name, country, founded, titles, championsLeagueParticipant } =
+    props;
   //   console.log("what are my props", props);
   return (
-    <div style={{ border: "1px solid black", margin: "5px 10px" }}>
+    <div
+      style={{
+        border: "5px solid black",
+        margin: "5px 10px",
+        minWidth: "450px",
+        background: "#a5d4c9",
+        textDecoration: "none",
+      }}
+    >
       <p>Name: {name}</p>
       <p>Country: {country}</p>
       <p>Founded: {founded}</p>
@@ -14,6 +23,11 @@ export default function TeamCard(props: Team) {
       <p>
         In the champions league: {championsLeagueParticipant ? "Yes" : "No"}
       </p>
+      <Link to={`/team/${id}`}>
+        <button style={{ margin: "15px auto", fontSize: "1em" }}>
+          Read more
+        </button>
+      </Link>
     </div>
   );
 }

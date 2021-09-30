@@ -8,23 +8,12 @@ import { API_URL } from "../config/constants";
 import { Team, TeamWPlayer, Player } from "../types/teamTypes";
 
 export default function TeamList() {
-  // const [listOfTeams, setListOfTeams] = useState<Team[]>([]);
-  const [team, setTeam] = useState<TeamWPlayer>({
-    id: null,
-    name: null,
-    country: null,
-    founded: null,
-    titles: null,
-    championsLeagueParticipant: null,
-    players: [],
-  });
+  const [listOfTeams, setListOfTeams] = useState<Team[]>([]);
 
   async function fetchTeams() {
     try {
-      // const response = await axios.get(`${API_URL}/teams`);
-      const responseTeam = await axios.get(`${API_URL}/teams/3`);
-      // setListOfTeams(response.data);
-      setTeam(responseTeam.data);
+      const response = await axios.get(`${API_URL}/teams`);
+      setListOfTeams(response.data);
     } catch (error) {
       if (error instanceof Error) {
         console.log("Error:", error.message);
@@ -32,7 +21,7 @@ export default function TeamList() {
     }
   }
 
-  console.log("team", team);
+  // console.log("team", team);
   useEffect(() => {
     fetchTeams();
   }, []);
@@ -41,8 +30,16 @@ export default function TeamList() {
 
   return (
     <div>
-      {/* <div style={{ display: "flex" }}> */}
-      {/* {listOfTeams.map((team) => {
+      <div
+        style={{
+          display: "flex",
+          width: "90vw",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          margin: "0 auto",
+        }}
+      >
+        {listOfTeams.map((team) => {
           const {
             id,
             name,
@@ -63,17 +60,6 @@ export default function TeamList() {
             />
           );
         })}
-      </div> */}
-      <div>
-        <TeamDetails
-          id={team.id}
-          name={team.name}
-          country={team.country}
-          founded={team.founded}
-          titles={team.titles}
-          championsLeagueParticipant={team.championsLeagueParticipant}
-          players={team.players}
-        />
       </div>
     </div>
   );
