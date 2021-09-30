@@ -39,14 +39,25 @@ export default function TeamDetails(props: TeamWPlayer) {
         border: "5px solid grey",
         width: "60vw",
         margin: "20px auto",
+        padding: 10,
       }}
     >
-      <p>Name: {teamDetails.name}</p>
-      <div>
-        {teamDetails.players.map((player) => {
-          return <p>Player: {player.name}</p>;
-        })}
-      </div>
+      <p>Team: {teamDetails.name}</p>
+      {teamDetails.players.map((player) => {
+        return (
+          <div
+            style={{
+              border: "2px solid black",
+              width: "80%",
+              margin: "0 auto",
+            }}
+          >
+            <p>Player: {player.name}</p>
+            <p>Nationality: {player.nationality}</p>
+            {player.retired ? <p>"Retired"</p> : null}
+          </div>
+        );
+      })}
     </div>
   );
 }
